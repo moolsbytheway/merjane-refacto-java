@@ -2,7 +2,7 @@ package com.nimbleways.merjane.services;
 
 import com.nimbleways.merjane.persistence.entities.Order;
 import com.nimbleways.merjane.persistence.entities.Product;
-import com.nimbleways.merjane.persistence.entities.ProductType;
+import com.nimbleways.merjane.domain.ProductType;
 import com.nimbleways.merjane.persistence.repositories.OrderRepository;
 import com.nimbleways.merjane.services.handlers.ProductTypeHandler;
 import com.nimbleways.merjane.utils.Annotations.UnitTest;

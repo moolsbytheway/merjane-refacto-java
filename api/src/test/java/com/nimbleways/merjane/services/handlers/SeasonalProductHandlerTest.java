@@ -1,7 +1,7 @@
 package com.nimbleways.merjane.services.handlers;
 
 import com.nimbleways.merjane.persistence.entities.Product;
-import com.nimbleways.merjane.persistence.entities.ProductType;
+import com.nimbleways.merjane.domain.ProductType;
 import com.nimbleways.merjane.persistence.repositories.ProductRepository;
 import com.nimbleways.merjane.services.NotificationService;
 import com.nimbleways.merjane.utils.Annotations.UnitTest;

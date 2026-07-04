@@ -1,5 +1,6 @@
 package com.nimbleways.merjane.persistence.entities;
 
+import com.nimbleways.merjane.domain.ProductType;
 import lombok.*;
 
 import java.time.LocalDate;

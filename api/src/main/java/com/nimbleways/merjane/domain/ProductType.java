@@ -1,4 +1,4 @@
-package com.nimbleways.merjane.persistence.entities;
+package com.nimbleways.merjane.domain;
 
 public enum ProductType {
     NORMAL, SEASONAL, EXPIRABLE

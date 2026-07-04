@@ -2,7 +2,7 @@ package com.nimbleways.merjane.controllers;
 
 import com.nimbleways.merjane.persistence.entities.Order;
 import com.nimbleways.merjane.persistence.entities.Product;
-import com.nimbleways.merjane.persistence.entities.ProductType;
+import com.nimbleways.merjane.domain.ProductType;
 import com.nimbleways.merjane.persistence.repositories.OrderRepository;
 import com.nimbleways.merjane.persistence.repositories.ProductRepository;
 import com.nimbleways.merjane.services.NotificationService;
@@ -24,7 +24,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @SpringBootTest
 @AutoConfigureMockMvc
