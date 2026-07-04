@@ -2,6 +2,7 @@ package com.nimbleways.springboilerplate.controllers;
 
 import com.nimbleways.springboilerplate.entities.Order;
 import com.nimbleways.springboilerplate.entities.Product;
+import com.nimbleways.springboilerplate.entities.ProductType;
 import com.nimbleways.springboilerplate.repositories.OrderRepository;
 import com.nimbleways.springboilerplate.repositories.ProductRepository;
 import com.nimbleways.springboilerplate.services.implementations.NotificationService;
@@ -99,9 +100,6 @@ public class MyControllerIntegrationTests {
         Assertions.assertEquals(0, (int) cheese.getAvailable());
         Mockito.verify(notificationService).sendExpirationNotification(eq("Cheese"), any(LocalDate.class));
 
-        // Unknown type : no logic applied, available unchanged
-        Product flashDeal = productRepository.findFirstByName("Flash Deal").get();
-        Assertions.assertEquals(10, (int) flashDeal.getAvailable());
     }
 
     private static Order createOrder(List<Product> products) {
@@ -112,22 +110,20 @@ public class MyControllerIntegrationTests {
 
     private static List<Product> createProducts() {
         List<Product> products = new ArrayList<>();
-        products.add(new Product(null, 15, 30, "NORMAL", "USB Cable", null, null, null));
-        products.add(new Product(null, 10, 0, "NORMAL", "USB Dongle", null, null, null));
-        products.add(new Product(null, 15, 30, "EXPIRABLE", "Butter", LocalDate.now().plusDays(26), null, null));
-        products.add(new Product(null, 90, 6, "EXPIRABLE", "Milk", LocalDate.now().minusDays(2), null, null));
-        products.add(new Product(null, 15, 30, "SEASONAL", "Watermelon", null, LocalDate.now().minusDays(2), LocalDate.now().plusDays(58)));
-        products.add(new Product(null, 15, 30, "SEASONAL", "Grapes", null, LocalDate.now().plusDays(180), LocalDate.now().plusDays(240)));
+        products.add(new Product(null, 15, 30, ProductType.NORMAL, "USB Cable", null, null, null));
+        products.add(new Product(null, 10, 0, ProductType.NORMAL, "USB Dongle", null, null, null));
+        products.add(new Product(null, 15, 30, ProductType.EXPIRABLE, "Butter", LocalDate.now().plusDays(26), null, null));
+        products.add(new Product(null, 90, 6, ProductType.EXPIRABLE, "Milk", LocalDate.now().minusDays(2), null, null));
+        products.add(new Product(null, 15, 30, ProductType.SEASONAL, "Watermelon", null, LocalDate.now().minusDays(2), LocalDate.now().plusDays(58)));
+        products.add(new Product(null, 15, 30, ProductType.SEASONAL, "Grapes", null, LocalDate.now().plusDays(180), LocalDate.now().plusDays(240)));
         // NORMAL: available = 0, leadTime = 0 : nothing happens
-        products.add(new Product(null, 0, 0, "NORMAL", "RJ45 Cable", null, null, null));
+        products.add(new Product(null, 0, 0, ProductType.NORMAL, "RJ45 Cable", null, null, null));
         // SEASONAL: in season, available = 0 : delay notification
-        products.add(new Product(null, 5, 0, "SEASONAL", "Mango", null, LocalDate.now().minusDays(2), LocalDate.now().plusDays(58)));
+        products.add(new Product(null, 5, 0, ProductType.SEASONAL, "Mango", null, LocalDate.now().minusDays(2), LocalDate.now().plusDays(58)));
         // SEASONAL: season ended : out-of-stock notification
-        products.add(new Product(null, 1, 5, "SEASONAL", "Strawberry", null, LocalDate.now().minusDays(100), LocalDate.now().minusDays(10)));
+        products.add(new Product(null, 1, 5, ProductType.SEASONAL, "Strawberry", null, LocalDate.now().minusDays(100), LocalDate.now().minusDays(10)));
         // EXPIRABLE: available = 0, not expired : expiration notification
-        products.add(new Product(null, 15, 0, "EXPIRABLE", "Cheese", LocalDate.now().plusDays(30), null, null));
-        // Unknown type : no logic applied, available unchanged
-        products.add(new Product(null, 0, 10, "FLASH_SALE", "Flash Deal", null, null, null));
+        products.add(new Product(null, 15, 0, ProductType.EXPIRABLE, "Cheese", LocalDate.now().plusDays(30), null, null));
         return products;
     }
 }
